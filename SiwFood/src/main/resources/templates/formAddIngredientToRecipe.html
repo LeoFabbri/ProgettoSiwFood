@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SiwFood - New Recipe</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .card{
+            border-color: #f56416;
+            border-radius: 20px;
+        }
+
+        .form-control{
+            border-color: #f56416;
+        }
+
+        .navbar {
+                /*background: linear-gradient(90deg, #9e2808 100%, #9e5c49 50%, #834230 0%);*/
+                /* background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(30,30,70,1) 50%, rgb(0, 0, 0) 100%); */
+                background-color: 	#009FB7;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #f56416 !important;
+            }
+            .nav-link {
+                color: #f56416 !important;
+                font-weight: bold;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+            .nav-link:hover {
+                color: #f56416 !important;
+            }
+            .nav-item {
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.1);
+                margin: 0 5px;
+                padding: 5px 10px;
+                transition: background-color 0.3s ease;
+            }
+            .nav-item:hover {
+                background-color: #008ca1;
+            }
+            .nav {
+                align-items: center;
+            }
+
+        .mb-4 {
+            text-align: center;
+        }
+
+        .main-content {
+            margin-top: 100px;
+        }
+
+        .title{
+            color: #000000;
+            text-align: center; /* Centra il contenuto orizzontalmente */
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f56416;
+            border-radius: 20px;
+            }
+
+        .Outer {
+            background-color: #ffffff;
+            border-radius: 20px;
+            color: #000000;
+            border-color: #f56416;
+        }
+        .Inner{
+            background-color: #ffffff;
+            border-color: #000000;
+        }
+        .Inner-body{
+            background-color: #f56416;
+            border-color: #000000;
+        }
+        .list-group-item{
+            border-color: #f56416;
+        }
+
+        .btn{
+                background-color: #009FB7;
+                color: #000000;
+                border-color: black;
+                border-radius: 15px;
+            }
+            .btn:hover{
+                background-color: #008ca1;
+                border-color: black;
+                color: #000000;
+            }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">SiwFood</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Esci</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">Crea un account</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <h1 class="mb-4 title">Aggiungi degli ingredienti alla ricetta</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <form th:action="@{'/addIngredientsToRecipe/'+${recipe.id}+'/recipeAppo'}" th:object="${recipeAppo}"
+                    method="post">
+
+                    <div id="ingredientsDiv">
+                        <div class="form-row align-items-center mt-2">
+                            <div class="col">
+                                <label for="ingredient_0_name">Nome: </label>
+                                <input type="text" class="form-control" id="ingredient_0_name" name="ingredients[0].name">
+                            </div>
+                            <div class="col">
+                                <label for="ingredient_0_quantity">Quantità: </label>
+                                <input type="number" class="form-control" id="ingredient_0_quantity" name="ingredients[0].quantity">
+                            </div>
+                            <div class="col">
+                                <label for="ingredient_0_unitaDiMisura">Unità di Misura: </label>
+                                <input type="text" class="form-control" id="ingredient_0_unitaDiMisura" name="ingredients[0].unitaDiMisura">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="button" class="btn btn-secondary mt-3" onclick="addIngredient()" value="Aggiungi Ingrediente">
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Registra</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let ingredientCont = 1;
+
+        function addIngredient() {
+            var div = document.getElementById('ingredientsDiv');
+            var newDiv = document.createElement('div');
+            newDiv.className = 'form-row align-items-center mt-2';
+
+            var newNameCol = document.createElement('div');
+            newNameCol.className = 'col';
+            var newNameLabel = document.createElement('label');
+            newNameLabel.setAttribute('for', 'ingredient_' + ingredientCont + '_name');
+            newNameLabel.textContent = 'Nome: ';
+            var newName = document.createElement('input');
+            newName.type = 'text';
+            newName.className = 'form-control';
+            newName.id = 'ingredient_' + ingredientCont + '_name';
+            newName.name = 'ingredients[' + ingredientCont + '].name';
+            newNameCol.appendChild(newNameLabel);
+            newNameCol.appendChild(newName);
+
+            var newQuantityCol = document.createElement('div');
+            newQuantityCol.className = 'col';
+            var newQuantityLabel = document.createElement('label');
+            newQuantityLabel.setAttribute('for', 'ingredient_' + ingredientCont + '_quantity');
+            newQuantityLabel.textContent = 'Quantità: ';
+            var newQuantity = document.createElement('input');
+            newQuantity.type = 'number';
+            newQuantity.className = 'form-control';
+            newQuantity.id = 'ingredient_' + ingredientCont + '_quantity';
+            newQuantity.name = 'ingredients[' + ingredientCont + '].quantity';
+            newQuantityCol.appendChild(newQuantityLabel);
+            newQuantityCol.appendChild(newQuantity);
+
+            var newUnitaDiMisuraCol = document.createElement('div');
+            newUnitaDiMisuraCol.className = 'col';
+            var newUnitaDiMisuraLabel = document.createElement('label');
+            newUnitaDiMisuraLabel.setAttribute('for', 'ingredient_' + ingredientCont + '_unitaDiMisura');
+            newUnitaDiMisuraLabel.textContent = 'Unità di Misura: ';
+            var newUnitaDiMisura = document.createElement('input');
+            newUnitaDiMisura.type = 'text';
+            newUnitaDiMisura.className = 'form-control';
+            newUnitaDiMisura.id = 'ingredient_' + ingredientCont + '_unitaDiMisura';
+            newUnitaDiMisura.name = 'ingredients[' + ingredientCont + '].unitaDiMisura';
+            newUnitaDiMisuraCol.appendChild(newUnitaDiMisuraLabel);
+            newUnitaDiMisuraCol.appendChild(newUnitaDiMisura);
+
+            newDiv.appendChild(newNameCol);
+            newDiv.appendChild(newQuantityCol);
+            newDiv.appendChild(newUnitaDiMisuraCol);
+
+            div.appendChild(newDiv);
+            ingredientCont++;
+        }
+    </script>
+
+</body>
+
+</html>

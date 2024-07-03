@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <!-- Includi Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+            padding-top: 80px; /* Aggiungi padding per evitare che il contenuto sia coperto dalla navbar */
+        }
+        .ingredients {
+            padding-bottom: 200px;
+            border-radius: 50px;
+            border-color: #962f32;
+            border-width: 20px;
+        }
+        .navbar {
+            background-color: #009FB7;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f56416 !important;
+        }
+        .nav-link {
+            color: #f56416 !important;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #f56416 !important;
+        }
+        .nav-item {
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 0 5px;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-item:hover {
+            background-color: #008ca1;
+        }
+        .nav {
+            align-items: center;
+        }
+        .Inner {
+            background-color: #f56416;
+        }
+        .display-4{
+            background-color: #f56416;
+            border-radius: 50px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">SiwFood</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Esci</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Prima sezione: Metà sinistra -->
+            <div class="col-md-6 sx">
+                <div th:if="${recipe}">
+                    <div class="row mt-2">
+                        <div th:each="img, iterStat : ${recipe.base64}" class="col-md-6 mb-4 d-flex align-items-stretch">
+                            <div class="card w-100 Inner">
+                                <img th:src="'data:image/;base64,' + ${img}" class="card-img-top img-thumbnail" style="height: 300px; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:unless="${recipe}">
+                    <i>Nessuna ricetta trovata</i>
+                </div>
+            </div>
+    
+            <!-- Seconda sezione: Metà destra -->
+            <div class="col-md-6">
+                <!-- Titolo e informazioni della ricetta -->
+                <div class="recipe-section text-center py-4">
+                    <div class="recipeInfoOuter mb-4">
+                        <h1 class="display-4">Informazioni della ricetta</h1>
+                    </div>
+                    <div th:if="${recipe}" class="recipeInfo text-dark">
+                        <div class="row justify-content-center mb-3">
+                            <h2 class="col-3 text-right">Nome: </h2>
+                            <h3 class="col-6 text-left font-italic"><span th:text="${recipe.name}"></span></h3>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h2 class="col-3 text-right">Descrizione: </h2>
+                            <h3 class="col-6 text-left font-italic"><span th:text="${recipe.description}"></span></h3>
+                        </div>
+                        <div th:if="${recipe.chef}" class="row justify-content-center mb-3">
+                            <h2 class="col-3 text-right">Chef: </h2>
+                            <h3 class="col-6 text-left font-italic"><a th:href="@{'/chefs/'+${recipe.chef.id}}"><span th:text="${recipe.chef.name} + ' ' + ${recipe.chef.surname}"></span></a></h3>
+                        </div>
+                        <div th:unless="${recipe.chef}" class="row justify-content-center mb-3">
+                            <h2 class="col-3 text-right">Chef: </h2>
+                            <h3 class="col-6 text-left">Nessuno</h3>
+                        </div>
+                    </div>
+                </div>
+                <div th:unless="${recipe}">
+                    <i>Nessuna ricetta trovata</i>
+                </div>
+
+                <!-- Ingredienti -->
+                <div class="recipe-section text-center py-4">
+                    <h1 class="display-4">Ingredienti</h1>
+                    <div th:if="${recipe.ingredients}" class="ingredients justify-content-center text-dark">
+                        <ul class="list-unstyled">
+                            <li th:each="ingredient : ${recipe.ingredients}" class="mb-2">
+                                <h3 class="font-italic">
+                                    <span th:text="${ingredient.name} + ' ' + ${ingredient.quantity} + ' ' + ${ingredient.unitaDiMisura}"></span>
+                                </h3>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:unless="${recipe.ingredients}">
+                        <i>Nessun ingrediente</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Includi Bootstrap JS, se necessario -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SiwFood - Update Ingredient</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(204, 202, 202);
+        }
+
+        .navbar {
+            background-color: #852325;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #cd950c !important;
+        }
+
+        .nav-link {
+            color: #cd950c !important;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #cd950c !important;
+        }
+
+        .nav-item {
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 0 5px;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: #ad4043;
+        }
+
+        .nav {
+            align-items: center;
+        }
+
+        .mb-4 {
+            text-align: center;
+        }
+
+        .main-content {
+            margin-top: 100px;
+        }
+
+        .title {
+            background-color: #962f32;
+            border-radius: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border: 5px solid #cd950c;
+            color: #cd950c;
+        }
+
+        .card {
+            background-color: #cd950c;
+            border-radius: 20px;
+            color: #852325;
+        }
+
+        .btn {
+            background-color: #962f32;
+            color: #cd950c;
+            border-color: #cd950c;
+            border-radius: 15px;
+        }
+
+        .btn:hover {
+            background-color: #852325;
+            border-color: black;
+            color: #f3b926c7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">SiwFood</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Esci</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">Crea un account</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <h1 class="mb-4 title">Modifica una Ricetta</h1>
+        <div class="card">
+            <div class="card-body">
+                <form th:action="@{'/admin/updateIngredient/'+${ingredientID}+'/newIngredient'}" th:objects="${newIngredient}" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <b><label for="name">Nome:</label></b>
+                        <input type="text" class="form-control" id="name" th:field="${newIngredient.name}">
+                    </div>
+
+                    <div class="form-group">
+                        <b><label for="quantity">Quantita':</label></b>
+                        <input type="number" class="form-control" id="quantity" th:field="${newIngredient.quantity}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <b><label for="unitaDiMisura">Unita' di misura:</label></b>
+                        <input type="text" class="form-control" id="unitaDiMisura" th:field="${newIngredient.unitaDiMisura}"/>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Registra</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

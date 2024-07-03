@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SiwFood - Edit Recipe</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .form-control{
+            border-color: #f56416;
+        }
+
+        .navbar {
+                /*background: linear-gradient(90deg, #9e2808 100%, #9e5c49 50%, #834230 0%);*/
+                /* background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(30,30,70,1) 50%, rgb(0, 0, 0) 100%); */
+                background-color: 	#009FB7;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #f56416 !important;
+            }
+            .nav-link {
+                color: #f56416 !important;
+                font-weight: bold;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+            .nav-link:hover {
+                color: #f56416 !important;
+            }
+            .nav-item {
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.1);
+                margin: 0 5px;
+                padding: 5px 10px;
+                transition: background-color 0.3s ease;
+            }
+            .nav-item:hover {
+                background-color: #008ca1;
+            }
+            .nav {
+                align-items: center;
+            }
+
+        .mb-4 {
+            text-align: center;
+        }
+
+        .main-content {
+            margin-top: 100px;
+        }
+
+        .title{
+            color: #000000;
+            text-align: center; /* Centra il contenuto orizzontalmente */
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f56416;
+            border-radius: 20px;
+            }
+
+        .Outer {
+            background-color: #ffffff;
+            border-radius: 20px;
+            color: #000000;
+            border-color: #f56416;
+        }
+        .Inner{
+            background-color: #ffffff;
+            border-color: #000000;
+        }
+        .Inner-body{
+            background-color: #f56416;
+            border-color: #000000;
+        }
+        .list-group-item{
+            border-color: #f56416;
+        }
+
+        .btn{
+                background-color: #009FB7;
+                color: #000000;
+                border-color: black;
+                border-radius: 15px;
+            }
+            .btn:hover{
+                background-color: #008ca1;
+                border-color: black;
+                color: #000000;
+            }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">SiwFood</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Esci</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+    <h1 class="mb-4 title">Modifica una Ricetta</h1>
+    <div class="card Outer">
+        <div class="card-body Outer-body">
+            <form th:action="@{'/updateRecipes/'+${recipeID}+'/newRecipe'}" th:objects="${newRecipe}" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <b><i><label for="name">Nome:</label></i></b>
+                    <input type="text" class="form-control" id="name" th:field="${newRecipe.name}">
+                </div>
+
+                <div class="form-group">
+                    <b><i><label for="description">Descrizione:</label></i></b>
+                    <textarea class="form-control" id="description" th:field="${newRecipe.description}"></textarea>
+                </div>
+
+                <div id="ingredientsDiv" th:unless="${newRecipe.ingredients.isEmpty()}">
+                    <b><i>Ingredienti:</i></b>
+                    <ul class="list-group mt-2">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" th:each="ingredient : ${newRecipe.ingredients}">
+                            <span th:text="${ingredient.name} + ' ' + ${ingredient.quantity} + ' ' + ${ingredient.unitaDiMisura}"></span>
+                            <a th:href="@{'/deleteIngredientFromRecipe/'+${recipeID}+'/'+${ingredient.id}}" class="btn btn-danger btn-sm">Elimina</a>
+                        </li>
+                    </ul>
+                    <a th:href="@{'/formAddIngredientsToRecipe/'+${recipeID}}" class="btn btn-secondary mt-3">Aggiungi</a>
+                </div>
+
+                <div th:if="${newRecipe.ingredients.isEmpty()}">
+                    <b><i>Ingredienti:</i></b>
+                    <a th:href="@{'/formAddIngredientsToRecipe/'+${recipeID}}" class="btn btn-secondary mt-3">Aggiungi</a>
+                </div>
+
+                <div class="row mt-3">
+                    <div th:each="img, iterStat : ${newRecipe.base64}" class="col-md-4 mb-4 d-flex align-items-stretch" th:id="'image_'+${iterStat.index}">
+                        <div class="card Inner">
+                            <img th:src="'data:image/;base64,' + ${img}" class="card-img-top img-thumbnail" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column Inner-body">
+                                <button type="button" class="btn btn-danger btn-sm mt-auto" th:onclick="'removeImage(this, ' + ${iterStat.index} + ')'">Rimuovi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <b><label class="newImages" for="newImages">Scegli immagine:</label></b>
+                    <input multiple type="file" class="form-control" id="newImages" name="newImages">
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Registra</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        function removeImage(button, index) {
+            // Aggiungi un input nascosto per indicare l'immagine da rimuovere
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'removeImageIndexes';
+            hiddenInput.value = index;
+            button.closest('form').appendChild(hiddenInput);
+
+            // Rimuovi la card di anteprima dell'immagine
+            document.getElementById('image_'+index).remove();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

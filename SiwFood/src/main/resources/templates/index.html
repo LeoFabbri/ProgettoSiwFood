@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SiwFood</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('images/sfondo2.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 4rem;
+            color: #f56416;
+        }
+        h3 {
+            font-family: 'Arial', sans-serif;
+            color: #343a40;
+        }
+        .btn-group .btn {
+            margin: 5px;
+            width: 300px;
+            background-color: #f56416;
+        }
+        .navbar {
+                /*background: linear-gradient(90deg, #9e2808 100%, #9e5c49 50%, #834230 0%);*/
+                /* background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(30,30,70,1) 50%, rgb(0, 0, 0) 100%); */
+                background-color: 	#009FB7;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #f56416 !important;
+            }
+            .nav-link {
+                color: #f56416 !important;
+                font-weight: bold;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+            .nav-link:hover {
+                color: #f56416 !important;
+            }
+            .nav-item {
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.1);
+                margin: 0 5px;
+                padding: 5px 10px;
+                transition: background-color 0.3s ease;
+            }
+            .nav-item:hover {
+                background-color: #008ca1;
+            }
+            .nav {
+                align-items: center;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">SiwFood</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">Crea un account</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center">
+        <h1>SiwFood</h1>
+        <i><h3>Crea e condividi le tue ricette con il resto del mondo!!</h3></i>
+        <div class="btn-group">
+            <a href="/home" class="btn btn-dark btn-lg">Continua come utente</a>
+            <a href="/login" class="btn btn-dark btn-lg">Login</a>
+        </div>
+    </div>
+</body>
+</html>

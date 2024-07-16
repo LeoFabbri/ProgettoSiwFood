@@ -108,9 +108,6 @@
                           <li class="nav-item">
                               <a class="nav-link" href="/logout">Esci</a>
                           </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/registration">Crea un account</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -130,7 +127,7 @@
                             <div class="carousel-inner">
                                 <!-- Loop sulle immagini della ricetta -->
                                 
-                                <img th:src="'data:image/;base64,' + ${image}" class="d-block w-100" alt="chef Image">
+                                <img th:src="'data:image/;base64,' + ${chef.base64}" class="d-block w-100" alt="chef Image">
                                 
                                 <!-- Fine loop sulle immagini della ricetta -->
                             </div>

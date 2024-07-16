@@ -22,7 +22,6 @@ public class Ingredient {
     @NotBlank
     private String name;
     private Integer quantity;
-    @NotBlank
     private String unitaDiMisura;
     
     public Long getId() {

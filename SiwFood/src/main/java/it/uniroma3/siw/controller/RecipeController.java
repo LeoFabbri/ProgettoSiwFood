@@ -247,7 +247,7 @@ public class RecipeController {
     public String getAdminFormUpdateRecipes(@PathVariable("id") Long id, Model model) {
         model.addAttribute("recipeID", id);
         model.addAttribute("newRecipe", this.recipeService.findById(id));
-        model.addAttribute("chefs", this.chefRepository.findAllExceptChef(this.recipeService.findById(id).getChef()));
+        model.addAttribute("chefs", this.chefRepository.findAll());
         return "admin/adminFormUpdateRecipes.html";
     }
 

@@ -121,16 +121,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Esci</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/registration">Crea un account</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container main-content">
-        <h1 class="mb-4 title">Modifica una Ricetta</h1>
+        <h1 class="mb-4 title">Modifica uno chef</h1>
         <div class="card">
             <div class="card-body">
                 <form th:action="@{'/admin/updateChef/'+${chefID}+'/newChef'}" th:objects="${newChef}" method="post" enctype="multipart/form-data">

@@ -6,45 +6,46 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: rgb(204, 202, 202);
+            background-color: rgb(255, 255, 255);
+        }
+
+        .form-control{
+            border-color: #f56416;
         }
 
         .navbar {
-            background-color: #852325;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #cd950c !important;
-        }
-
-        .nav-link {
-            color: #cd950c !important;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #cd950c !important;
-        }
-
-        .nav-item {
-            border-radius: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin: 0 5px;
-            padding: 5px 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-item:hover {
-            background-color: #ad4043;
-        }
-
-        .nav {
-            align-items: center;
-        }
+                /*background: linear-gradient(90deg, #9e2808 100%, #9e5c49 50%, #834230 0%);*/
+                /* background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(30,30,70,1) 50%, rgb(0, 0, 0) 100%); */
+                background-color: 	#009FB7;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #f56416 !important;
+            }
+            .nav-link {
+                color: #f56416 !important;
+                font-weight: bold;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+            .nav-link:hover {
+                color: #f56416 !important;
+            }
+            .nav-item {
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.1);
+                margin: 0 5px;
+                padding: 5px 10px;
+                transition: background-color 0.3s ease;
+            }
+            .nav-item:hover {
+                background-color: #008ca1;
+            }
+            .nav {
+                align-items: center;
+            }
 
         .mb-4 {
             text-align: center;
@@ -54,33 +55,44 @@
             margin-top: 100px;
         }
 
-        .title {
-            background-color: #962f32;
+        .title{
+            color: #000000;
+            text-align: center; /* Centra il contenuto orizzontalmente */
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f56416;
             border-radius: 20px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border: 5px solid #cd950c;
-            color: #cd950c;
-        }
+            }
 
-        .card {
-            background-color: #cd950c;
+        .Outer {
+            background-color: #ffffff;
             border-radius: 20px;
-            color: #852325;
+            color: #000000;
+            border-color: #f56416;
+        }
+        .Inner{
+            background-color: #ffffff;
+            border-color: #000000;
+        }
+        .Inner-body{
+            background-color: #f56416;
+            border-color: #000000;
+        }
+        .list-group-item{
+            border-color: #f56416;
         }
 
-        .btn {
-            background-color: #962f32;
-            color: #cd950c;
-            border-color: #cd950c;
-            border-radius: 15px;
-        }
-
-        .btn:hover {
-            background-color: #852325;
-            border-color: black;
-            color: #f3b926c7;
-        }
+        .btn{
+                background-color: #009FB7;
+                color: #000000;
+                border-color: black;
+                border-radius: 15px;
+            }
+            .btn:hover{
+                background-color: #008ca1;
+                border-color: black;
+                color: #000000;
+            }
     </style>
 </head>
 

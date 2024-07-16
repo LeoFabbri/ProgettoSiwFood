@@ -86,14 +86,10 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Prima sezione: Metà sinistra -->
-            <div class="col-md-6 sx">
+            <div class="col-md-6 sx d-flex justify-content-center align-items-center">
                 <div th:if="${chef}">
-                    <div class="row mt-2">
-                        <div th:each="img, iterStat : ${chef.base64}" class="col-md-6 mb-4 d-flex align-items-stretch">
-                            <div class="card w-100 Inner">
-                                <img th:src="'data:image/;base64,' + ${img}" class="card-img-top img-thumbnail" style="height: 300px; object-fit: cover;">
-                            </div>
-                        </div>
+                    <div class="card w-75 Inner">
+                        <img th:src="'data:image/;base64,' + ${chef.base64}" class="card-img-top img-thumbnail" style="object-fit: cover;">
                     </div>
                 </div>
                 <div th:unless="${chef}">
@@ -127,9 +123,9 @@
                     <i>Nessuna ricetta trovata</i>
                 </div>
 
-                <!-- Ingredienti -->
+                <!-- Ricette -->
                 <div class="chef-section text-center py-4">
-                    <h1 class="display-4">Ingredienti</h1>
+                    <h1 class="display-4">Ricette</h1>
                     <div th:if="${chef.recipesCreated}" class="recipesCreated justify-content-center text-dark">
                         <ul class="list-unstyled">
                             <li th:each="recipe : ${chef.recipesCreated}" class="mb-2">

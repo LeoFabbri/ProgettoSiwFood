@@ -122,7 +122,7 @@
                 <!-- Inizio loop delle ricette -->
                 <div class="col mb-4" th:each="recipe : ${recipes}">
                     <div class="card h-100">
-                        <!-- Bootstrap carousel for recipe images -->
+                        <!-- carosello per le immagini delle ricette -->
                         <div th:attr="id='carousel-' + ${recipe.id}" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <!-- Loop sulle immagini della ricetta -->

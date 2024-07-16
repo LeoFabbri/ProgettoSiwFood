@@ -30,6 +30,7 @@ public class Recipe {
     private Long id;
     @NotBlank
     private String name;
+    @Column(length = 1000000000)
     private String description;
     @Column(length = 1000000000)
     private List<String> base64;

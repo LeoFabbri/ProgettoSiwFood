@@ -122,7 +122,7 @@
             <!-- Inizio loop dei chefs -->
             <div class="col mb-4" th:each="chef : ${chefs}">
                 <div class="card h-100">
-                    <!-- Bootstrap carousel for chef images -->
+                    <!-- carosello per le immagini dello chef -->
                     <div th:attr="id='carousel-' + ${chef.id}" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <!-- Loop sulle immagini del chef -->
